@@ -1,4 +1,4 @@
-import React from 'react'
+import Feed from "@components/feed"
 
 const Home = () => {
   return (
@@ -10,9 +10,10 @@ const Home = () => {
                 AI-Powered Prompts
             </span>
             <p className='desc text-center'>
-                AI Prompt is an open-source AI prompting tool for modern to discover, create and share creative prompts
+                AI Prompt is an open-source AI prompting tool for modern world to discover, create and share creative prompts
             </p>
         </h1>
+        <Feed/>
     </section>
   )
 }
