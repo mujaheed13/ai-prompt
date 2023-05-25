@@ -2,13 +2,13 @@
 
 import Link from "next/link";
 import Image from "next/image";
-import { Suspense, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { signIn, signOut, useSession, getProviders } from "next-auth/react"
 
 const Nav = () => {
     // const isUserLoggedIn = true;
-
     const [isUserLoggedIn, setIsUserLoggedIn] = useState(true);
+    const [toggleDropDown, setToggleDropDown] = useState(false);
 
     const [providers, setProviders] = useState(null);
 
@@ -66,6 +66,30 @@ const Nav = () => {
                 </>)
             }
         </div>
+        { /* Mobile Navigation */  }
+        {
+          <div className="sm:hidden flex relative">
+            {
+              isUserLoggedIn ? (
+                <div className="flex">
+                  <Image src="/assets/images/logo.svg" alt="Profile Logo" width={37} height={37} className="rounded-full" onClick={()=>{
+                    setToggleDropDown(!toggleDropDown)
+                  }} />
+
+                </div>
+              ) : (
+                providers &&
+                Object.values(providers).map((provider) =>{
+                  <button type="button" key={provider.name} onClick={()=>{
+                    signIn(provider.id);
+                  }} className="black_btn" >
+                    Sign In
+                  </button>
+                })
+              )
+            }
+          </div>
+        }
     </nav>
   )
 }
